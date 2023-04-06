@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 // import { StorageService } from '../../../shared/services/storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductGroupsService {
   constructor(
@@ -17,6 +17,8 @@ export class ProductGroupsService {
   getListOfProductGroups(param): Observable<any> {
     // const store = this.storageService.getMerchant();
     return this.crudService.get(`/v1/private/product/groups`, param);
+        // return this.crudService.get(`/v1/products/group`, param);
+
   }
 
   // TODO
@@ -28,15 +30,16 @@ export class ProductGroupsService {
   // }
 
   createProductGroup(group): Observable<any> {
-    return this.crudService.post(`/v1/private/product/group`, group);
+    return this.crudService.post(`/v1/private/products/group`, group);
   }
 
   updateGroupActiveValue(group): Observable<any> {
-    return this.crudService.patch(`/v1/private/product/group/${group.code}`, group);
+    // return this.crudService.patch(`/v1/private/products/group/${group.code}`, group);
+    return this.crudService.patch(`/v1/private/products/group/${group.code}`, group);
   }
 
   addProductToGroup(productId, groupCode): Observable<any> {
-    return this.crudService.post(`/v1/private/product/${productId}/group/${groupCode}`, {});
+    return this.crudService.post(`/v1/private/products/${productId}/group/${groupCode}`, {});
   }
 
   removeProductFromGroup(productId, groupCode) {
@@ -44,7 +47,7 @@ export class ProductGroupsService {
   }
 
   getProductsByGroup(groupCode, params) {
-    return this.crudService.get(`/v1/product/group/${groupCode}`, params);
+    return this.crudService.get(`/v1/products/group/${groupCode}`, params);
   }
 
   removeProductGroup(groupCode) {
